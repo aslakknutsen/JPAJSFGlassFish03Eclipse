@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kenfogel</groupId>
     <artifactId>JPAGlassFish03</artifactId>
@@ -25,24 +25,15 @@
     </dependencyManagement>
 
     <dependencies>
-<!--                 <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-glassfish-remote-3.1</artifactId>
-            <version>1.0.0.CR4</version>
-            <scope>test</scope>
-        </dependency> -->
-           <dependency>
-            <groupId>org.jboss.arquillian.container</groupId>
-            <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
-            <version>1.0.0.CR4</version>
-            <scope>test</scope>
-        </dependency>
+        <!-- <dependency> <groupId>org.jboss.arquillian.container</groupId> 
+            <artifactId>arquillian-glassfish-remote-3.1</artifactId> <version>1.0.0.CR4</version> 
+            <scope>test</scope> </dependency> -->
         <dependency>
             <groupId>org.glassfish.main.extras</groupId>
             <artifactId>glassfish-embedded-all</artifactId>
-            <version>3.1.2.2</version>
+            <version>4.1</version>
             <scope>test</scope>
-        </dependency> 
+        </dependency>
 
         <!-- Connects Arquillian to JUnit -->
         <dependency>
@@ -81,20 +72,45 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Resolves dependencies from the pom.xml when explicitly referred to in the Arquillian deploy method -->
+        <!-- Resolves dependencies from the pom.xml when explicitly referred 
+            to in the Arquillian deploy method -->
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!--    <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>5.1</version>
-        </dependency>-->
+        <!-- <dependency> <groupId>org.primefaces</groupId> <artifactId>primefaces</artifactId> 
+            <version>5.1</version> </dependency> -->
 
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>embedded</id>
+            <activation><activeByDefault>true</activeByDefault></activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
+                    <version>1.0.0.CR4</version>
+                    <scope>test</scope>
+                </dependency>
+
+            </dependencies>
+        </profile>
+        <profile>
+            <id>remote</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-glassfish-remote-3.1</artifactId>
+                    <version>1.0.0.CR4</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
     <build>
         <testResources>
@@ -119,15 +135,15 @@
                 <groupId>org.bsc.maven</groupId>
                 <artifactId>maven-processor-plugin</artifactId>
                 <version>2.2.4</version>
-<!--                 <executions> -->
-<!--                     <execution> -->
-<!--                         <id>process</id> -->
-<!--                         <goals> -->
-<!--                             <goal>process</goal> -->
-<!--                         </goals> -->
-<!--                         <phase>process-sources</phase> -->
-<!--                     </execution> -->
-<!--                 </executions> -->
+                <!-- <executions> -->
+                <!-- <execution> -->
+                <!-- <id>process</id> -->
+                <!-- <goals> -->
+                <!-- <goal>process</goal> -->
+                <!-- </goals> -->
+                <!-- <phase>process-sources</phase> -->
+                <!-- </execution> -->
+                <!-- </executions> -->
             </plugin>
 
             <plugin>
@@ -149,37 +165,36 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>2.9</version>
-<!--                 <executions> -->
-<!--                     <execution> -->
-<!--                         <phase>validate</phase> -->
-<!--                         <goals> -->
-<!--                             <goal>copy</goal> -->
-<!--                         </goals> -->
-<!--                         <configuration> -->
-<!--                             <outputDirectory>${endorsed.dir}</outputDirectory> -->
-<!--                             <silent>true</silent> -->
-<!--                             <artifactItems> -->
-<!--                                 <artifactItem> -->
-<!--                                     <groupId>javax</groupId> -->
-<!--                                     <artifactId>javaee-endorsed-api</artifactId> -->
-<!--                                     <version>7.0</version> -->
-<!--                                     <type>jar</type> -->
-<!--                                 </artifactItem> -->
-<!--                             </artifactItems> -->
-<!--                         </configuration> -->
-<!--                     </execution> -->
-<!--                 </executions> -->
+                <!-- <executions> -->
+                <!-- <execution> -->
+                <!-- <phase>validate</phase> -->
+                <!-- <goals> -->
+                <!-- <goal>copy</goal> -->
+                <!-- </goals> -->
+                <!-- <configuration> -->
+                <!-- <outputDirectory>${endorsed.dir}</outputDirectory> -->
+                <!-- <silent>true</silent> -->
+                <!-- <artifactItems> -->
+                <!-- <artifactItem> -->
+                <!-- <groupId>javax</groupId> -->
+                <!-- <artifactId>javaee-endorsed-api</artifactId> -->
+                <!-- <version>7.0</version> -->
+                <!-- <type>jar</type> -->
+                <!-- </artifactItem> -->
+                <!-- </artifactItems> -->
+                <!-- </configuration> -->
+                <!-- </execution> -->
+                <!-- </executions> -->
             </plugin>
 
             <plugin>
-                <!-- Executes JUnit tests and writes the results as an xml and txt file
-                Test classes must include one of the following in their name: Test* *Test
-                *TestCase -->
+                <!-- Executes JUnit tests and writes the results as an xml 
+                    and txt file Test classes must include one of the following in their name: 
+                    Test* *Test *TestCase -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18.1</version>
                 <configuration>
-                    <skipTests>false</skipTests>
                     <systemPropertyVariables>
                         <java.util.logging.config.file>
                             src/test/resources-glassfish-remote/logging.properties
