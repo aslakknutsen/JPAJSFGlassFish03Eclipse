@@ -1,5 +1,5 @@
 # JPAJSFGlassFish03Eclipse
-Sample code that demonstrates usage of JPA and Arquillian
+Eclipse sample code that demonstrates usage of JPA, JSF and Arquillian
 
 The story behind the creation of this project can be found at http://www.omniprogrammer.com/?p=431
 
